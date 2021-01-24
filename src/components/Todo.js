@@ -1,13 +1,16 @@
 import React from "react";
 
-const Todo = ({ text, completed, id, delteTodo }) => {
+const Todo = ({ text, completed, id, delteTodo, handleComplete }) => {
   const childDelete = () => {
     delteTodo(id);
+  };
+  const completeHelper = () => {
+    handleComplete(id);
   };
   return (
     <div className="todo">
       <li className="todo-item">{text}</li>
-      <button className="complete-btn">
+      <button onClick={completeHelper} className="complete-btn">
         <i className="fas fa-check"></i>
       </button>
       <button onClick={childDelete} className="trash-btn">

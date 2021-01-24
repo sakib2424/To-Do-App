@@ -5,11 +5,13 @@ import TodoList from "./components/TodoList";
 
 function App() {
   const [inputText, setInputText] = useState("");
-  const [fullList, setFullList] = useState([]);
+  const [uncompletedList, setUncompletedList] = useState([]);
+  const [completedList, setCompletedList] = useState([]);
 
   useEffect(() => {
-    console.log(fullList);
-  }, [fullList]);
+    console.log(uncompletedList);
+    console.log(completedList);
+  }, [uncompletedList]);
 
   return (
     <div className="App">
@@ -17,12 +19,17 @@ function App() {
         <h1>Sakib's to-do list</h1>
       </header>
       <Form
-        todos={fullList}
-        setTodos={setFullList}
+        todos={uncompletedList}
+        setTodos={setUncompletedList}
         setInputText={setInputText}
         inputText={inputText}
       ></Form>
-      <TodoList todos={fullList} setTodos={setFullList}></TodoList>
+      <TodoList
+        todos={uncompletedList}
+        setTodos={setUncompletedList}
+        completedList={completedList}
+        setCompletedList={setCompletedList}
+      ></TodoList>
     </div>
   );
 }
