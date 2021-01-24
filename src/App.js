@@ -22,7 +22,7 @@ function App() {
         setInputText={setInputText}
         inputText={inputText}
       ></Form>
-      <TodoList todos={fullList}></TodoList>
+      <TodoList todos={fullList} setTodos={setFullList}></TodoList>
     </div>
   );
 }
