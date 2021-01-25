@@ -1,17 +1,25 @@
 import React from "react";
 import Todo from "./Todo";
 
-const TodoList = ({ todos, setTodos, completedList, setCompletedList }) => {
+const TodoList = ({
+  uncompletedList,
+  setUncompletedList,
+  completedList,
+  setCompletedList,
+  displayList,
+}) => {
   //   Delete to-do
   const delteTodo = (idToDelete) => {
-    setTodos(todos.filter((item) => item.id !== idToDelete));
+    setUncompletedList(
+      uncompletedList.filter((item) => item.id !== idToDelete)
+    );
   };
 
   // Mark as completed
   const handleComplete = (idOfCompleted) => {
     let found = undefined;
     // Find the item to change
-    todos.forEach((item) => {
+    uncompletedList.forEach((item) => {
       if (item.id === idOfCompleted) {
         found = item;
       }
@@ -25,7 +33,7 @@ const TodoList = ({ todos, setTodos, completedList, setCompletedList }) => {
   };
 
   //   Renders the list of to-dos
-  const renderedList = todos.map((item) => (
+  const renderedList = displayList.map((item) => (
     <Todo
       text={item.text}
       completed={item.completed}

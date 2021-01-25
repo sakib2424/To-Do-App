@@ -1,14 +1,20 @@
 import React from "react";
 
-const Form = ({ todos, setTodos, setInputText, inputText }) => {
+const Form = ({
+  uncompletedList,
+  setUncompletedList,
+  setInputText,
+  inputText,
+  setSelected,
+}) => {
   const inputHandler = (e) => {
     setInputText(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos([
-      ...todos,
+    setUncompletedList([
+      ...uncompletedList,
       {
         text: inputText,
         completed: false,
@@ -16,6 +22,10 @@ const Form = ({ todos, setTodos, setInputText, inputText }) => {
       },
     ]);
     setInputText("");
+  };
+
+  const changeState = (e) => {
+    setSelected(e.target.value);
   };
 
   return (
@@ -29,11 +39,11 @@ const Form = ({ todos, setTodos, setInputText, inputText }) => {
       <button onClick={handleSubmit} className="todo-button" type="submit">
         <i className="fa fa-plus-square"></i>
       </button>
-      <div className="select">
+      <div className="select" onChange={changeState}>
         <select name="todos" className="filter-todo">
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
+          <option value="All">All</option>
+          <option value="Completed">Completed</option>
+          <option value="Uncompleted">Uncompleted</option>
         </select>
       </div>
     </form>

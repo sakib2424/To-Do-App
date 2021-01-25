@@ -5,13 +5,27 @@ import TodoList from "./components/TodoList";
 
 function App() {
   const [inputText, setInputText] = useState("");
+
+  // Lists
   const [uncompletedList, setUncompletedList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
 
+  const [selected, setSelected] = useState("All");
+  const [displayList, setDisplayList] = useState(uncompletedList);
+
+  const updateDisplay = () => {
+    if (selected === "All") {
+      setDisplayList(uncompletedList.concat(completedList));
+    } else if (selected === "Completed") {
+      setDisplayList(completedList);
+    } else {
+      setDisplayList(uncompletedList);
+    }
+  };
+
   useEffect(() => {
-    console.log(uncompletedList);
-    console.log(completedList);
-  }, [uncompletedList]);
+    updateDisplay();
+  }, [completedList, uncompletedList, selected]);
 
   return (
     <div className="App">
@@ -19,16 +33,18 @@ function App() {
         <h1>Sakib's to-do list</h1>
       </header>
       <Form
-        todos={uncompletedList}
-        setTodos={setUncompletedList}
+        uncompletedList={uncompletedList}
+        setUncompletedList={setUncompletedList}
         setInputText={setInputText}
         inputText={inputText}
+        setSelected={setSelected}
       ></Form>
       <TodoList
-        todos={uncompletedList}
-        setTodos={setUncompletedList}
+        uncompletedList={uncompletedList}
         completedList={completedList}
+        setUncompletedList={setUncompletedList}
         setCompletedList={setCompletedList}
+        displayList={displayList}
       ></TodoList>
     </div>
   );
